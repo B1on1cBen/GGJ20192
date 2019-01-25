@@ -29,7 +29,6 @@ public class RoomGenerationScript : MonoBehaviour {
             while(currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] != null)
             {
                 currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
-                Debug.Log("stepped east");
             }
 
             GameObject newBlock = Instantiate(GenericBuildingBlock);

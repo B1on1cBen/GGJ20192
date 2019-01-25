@@ -5,8 +5,7 @@ using UnityEngine;
 public class BuildingBlock : MonoBehaviour {
 
     public GameObject Occupant;
-
-    public GameObject[] Borders;
+    [HideInInspector] public GameObject[] Borders;
 
 	// Use this for initialization
 	void Start () {

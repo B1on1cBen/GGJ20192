@@ -24,9 +24,11 @@ public class RoomGenerationScript : MonoBehaviour {
 
         for(int i = 0; i < x; i++)
         {
-            while(topLeft.GetComponent<BuildingBlock>().Borders[(int)Direction.East] != null)
+            currentBlock = topLeft;
+
+            while(currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] != null)
             {
-                currentBlock = topLeft.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
+                currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
                 Debug.Log("stepped east");
             }
 
@@ -35,7 +37,7 @@ public class RoomGenerationScript : MonoBehaviour {
             currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] = newBlock;
             currentBlock = newBlock;
 
-            for (int j = 0; j < y; j++)
+            for (int j = 1; j < y; j++)
             {
                 newBlock = Instantiate(GenericBuildingBlock);
                 newBlock.transform.position = new Vector3(currentBlock.transform.position.x, currentBlock.transform.position.y, currentBlock.transform.position.z + newBlock.transform.localScale.z);
@@ -43,5 +45,11 @@ public class RoomGenerationScript : MonoBehaviour {
                 currentBlock = newBlock;
             }
         }
+
+        GenericBuildingBlock.SetActive(false);
+        GameManager.manager.topLeft = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.South];
+        topLeft.SetActive(false);
+        Destroy(topLeft);
+        Destroy(GenericBuildingBlock);
     }
 }

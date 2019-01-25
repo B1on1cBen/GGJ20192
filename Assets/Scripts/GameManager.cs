@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager manager;
 
+    public int xLength;
+    public int yLength;
+
     private void Awake()
     { 
         if(manager == null)
@@ -32,7 +35,7 @@ public class GameManager : MonoBehaviour {
 
     public void generate()
     {
-        GetComponent<RoomGenerationScript>().generate(2, 2);
+        GetComponent<RoomGenerationScript>().generate(xLength, yLength);
     }
 }
 

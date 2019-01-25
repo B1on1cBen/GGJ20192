@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     public int xLength;
     public int yLength;
 
+    public List<Furniture> furniture = new List<Furniture>();
+
     private void Awake()
     { 
         if(manager == null)

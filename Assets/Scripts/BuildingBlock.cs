@@ -3,7 +3,7 @@
 public class BuildingBlock : MonoBehaviour
 {
     public GameObject Occupant;
-    [HideInInspector] public GameObject[] Borders;
+    public GameObject[] Borders;
 
     public Vector3 GetNeighborPosition(int x, int y)
     {

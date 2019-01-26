@@ -51,36 +51,36 @@ public class RoomGenerationScript : MonoBehaviour {
         GameManager.manager.topLeft = topLeft.GetComponent<BuildingBlock>().Borders[1];
         Destroy(topLeft.gameObject);
 
-        //foreach(Furniture furniture in GameManager.manager.furniture)
-        //{
-        //    currentBlock = topLeft;
+        foreach (Furniture furniture in GameManager.manager.furniture)
+        {
+            currentBlock = GameManager.manager.topLeft;
 
-        //    for (int i = 0; i < furniture.gameObject.GetComponent<SpawningOrigin>().x; i++)
-        //    {
-        //        currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
-        //    }
-        //    for (int i = 0; i < furniture.gameObject.GetComponent<SpawningOrigin>().y; i++)
-        //    {
-        //        currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.South];
-        //    }
+            for (int i = 0; i < furniture.gameObject.GetComponent<SpawningOrigin>().x; i++)
+            {
+                currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
+            }
+            for (int i = 0; i < furniture.gameObject.GetComponent<SpawningOrigin>().y; i++)
+            {
+                currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.South];
+            }
 
-        //    BuildingBlock originBlock = currentBlock.GetComponent<BuildingBlock>();
-        //    originBlock.Occupant = furniture.gameObject;
+            BuildingBlock originBlock = currentBlock.GetComponent<BuildingBlock>();
+            originBlock.Occupant = furniture.gameObject;
 
-        //    for(int i = 1; i <= furniture.length; i++)
-        //    {
-        //        currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[((int)furniture.facing + (int)Direction.East)%4];
-        //        currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
-        //        GameObject startingBlock = currentBlock;
-        //        furniture.OriginSquare = startingBlock;
-        //        for(int j = 1; j <= furniture.width; j++)
-        //        {
-        //            currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[((int)furniture.facing + (int)Direction.South)%4];
-        //            currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
-        //        }
-        //        currentBlock = startingBlock;
-        //    }
-        //    //Destroy(furniture.gameObject.GetComponent<SpawningOrigin>());
-        //}
+            for (int i = 1; i <= furniture.length; i++)
+            {
+                currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(/*(int)furniture.facing +*/ (int)Direction.East) % 4];
+                currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
+                GameObject startingBlock = currentBlock;
+                furniture.OriginSquare = startingBlock;
+                for (int j = 1; j <= furniture.width; j++)
+                {
+                    currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(/*(int)furniture.facing +*/ (int)Direction.South) % 4];
+                    currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
+                }
+                currentBlock = startingBlock;
+            }
+            //Destroy(furniture.gameObject.GetComponent<SpawningOrigin>());
+        }
     }
 }

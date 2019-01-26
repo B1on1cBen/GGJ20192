@@ -47,10 +47,37 @@ public class Cursor : MonoBehaviour
 
         if (h != 0 || v != 0)
         {
-            wantedPosition = currentBlock.GetNeighborPosition(h, -v);
+            int newH = h;
+            int newV = v;
 
-            if(wantedPosition != currentBlock.transform.position)
-                currentBlock = currentBlock.GetNeighbor(h, -v);
+            int rotY = (int)Quaternion.Euler(new Vector3(0, wantedYRot, 0)).eulerAngles.y;
+
+            switch (rotY)
+            {
+                case 90:
+                    newH = v;
+                    newV = -h;
+                    break;
+
+                case 180:
+                    newH = -h;
+                    newV = -v;
+                    break;
+
+                case 270:
+                    newH = -v;
+                    newV = h;
+                    break;
+
+                case 0:
+                default:
+                    break;              
+            }
+
+            wantedPosition = currentBlock.GetNeighborPosition(newH, -newV);
+
+            if (wantedPosition != currentBlock.transform.position)
+                currentBlock = currentBlock.GetNeighbor(newH, -newV);
         }
 
         transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * moveSpeed);

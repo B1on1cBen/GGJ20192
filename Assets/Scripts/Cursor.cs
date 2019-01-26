@@ -25,51 +25,35 @@ public class Cursor : MonoBehaviour
 
     float wantedYRot;
     float moveTimer;
+    int previousH;
+    int previousV;
 
-    void Awake()
+    Vector3 wantedPosition;
+
+    void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         gameManager.generate();
         currentBlock = gameManager.topLeft.GetComponent<BuildingBlock>();
         transform.position = currentBlock.transform.position;
+        wantedPosition = transform.position;
     }
 
     void Update()
     {
         Rotate();
-        Point movement = GetMovement();
-        MoveToNewTile(movement);
-    }
+        int h = (int)Input.GetAxisRaw("Horizontal");
+        int v = (int)Input.GetAxisRaw("Vertical");
 
-    void MoveToNewTile(Point movement)
-    {
-        if (movement.x == 0 && movement.y == 0)
-            return;
+        if (h != 0 || v != 0)
+        {
+            wantedPosition = currentBlock.GetNeighborPosition(h, -v);
 
-        Vector3 wantedPosition = currentBlock.GetNeighborPosition(movement.x, movement.y);
-        if (wantedPosition == currentBlock.transform.position)
-            return;
+            if(wantedPosition != currentBlock.transform.position)
+                currentBlock = currentBlock.GetNeighbor(h, -v);
+        }
 
         transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * moveSpeed);
-    }
-
-    Point GetMovement()
-    {
-        if (moveTimer <= 0)
-        {
-            moveTimer = moveInterval;
-
-            int h = (int)Input.GetAxisRaw("Horizontal");
-            int v = (int)Input.GetAxisRaw("Vertical");
-
-            return new Point(h, v);
-        }
-        else
-        {
-            moveTimer -= Time.deltaTime;
-        }
-
-        return new Point(0, 0);
     }
 
     void Rotate()

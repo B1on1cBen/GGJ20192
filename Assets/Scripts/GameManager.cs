@@ -25,15 +25,6 @@ public class GameManager : MonoBehaviour {
 
     public GameObject topLeft;
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void generate()
     {
         GetComponent<RoomGenerationScript>().generate(xLength, yLength);
@@ -45,6 +36,5 @@ public enum Direction
     North = 0,
     East,
     South,
-    West,
-    
+    West   
 }

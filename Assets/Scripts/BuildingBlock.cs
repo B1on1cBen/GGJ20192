@@ -10,7 +10,7 @@ public class BuildingBlock : MonoBehaviour
         if (!NeighborExists(x, y))
             return transform.position;
 
-        return Borders[ConvertXYToNeighborIndex(x, y)].transform.position;
+        return Borders[GameManager.manager.ConvertXYToNeighborIndex(x, y)].transform.position;
     }
 
     public BuildingBlock GetNeighbor(int x, int y)
@@ -18,28 +18,11 @@ public class BuildingBlock : MonoBehaviour
         if (!NeighborExists(x, y))
             return null;
 
-        return Borders[ConvertXYToNeighborIndex(x, y)].GetComponent<BuildingBlock>();
+        return Borders[GameManager.manager.ConvertXYToNeighborIndex(x, y)].GetComponent<BuildingBlock>();
     } 
 
     private bool NeighborExists(int x, int y)
     {
-        return Borders[ConvertXYToNeighborIndex(x, y)] != null;
-    }
-
-    private int ConvertXYToNeighborIndex(int x, int y)
-    {
-        if (y == 1)
-            return 0;
-
-        if (x == 1)
-            return 1;
-
-        if (y == -1)
-            return 2;
-
-        if (x == -1)
-            return 3;
-
-        return 0;
+        return Borders[GameManager.manager.ConvertXYToNeighborIndex(x, y)] != null;
     }
 }

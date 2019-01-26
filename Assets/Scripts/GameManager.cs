@@ -30,17 +30,27 @@ public class GameManager : MonoBehaviour {
         GetComponent<RoomGenerationScript>().generate(xLength, yLength);
     }
 
+    public int ConvertXYToNeighborIndex(int x, int y)
+    {
+        if (y == 1)
+            return 0;
+
+        if (x == 1)
+            return 1;
+
+        if (y == -1)
+            return 2;
+
+        if (x == -1)
+            return 3;
+
+        return 0;
+    }
+
     public bool canMove(Furniture block, Direction dir)
     {
         //how many spots to check
         int count = block.width;
-        //if (block.facing == Direction.North || block.facing == Direction.South)
-        //{
-        //    count = block.width;
-        //} else if(block.facing == Direction.East || block.facing == Direction.West)
-        //{
-        //    count = block.length;
-        //}
 
 
         //move to border
@@ -49,11 +59,11 @@ public class GameManager : MonoBehaviour {
         {
             startBlock = startBlock.Borders[(int)dir].GetComponent<BuildingBlock>();
         }
-        int set = (int)dir - 1;
-        set = (set == -1) ? 3 : set;
+        int set = ((int)dir+1)%4;
+       // set = (set == -1) ? 3 : set;
         while (startBlock.Borders[set] != null && startBlock.Borders[set].GetComponent<BuildingBlock>().Occupant == block.gameObject)
         {
-            startBlock = startBlock.Borders[(int)Direction.North].GetComponent<BuildingBlock>();
+            startBlock = startBlock.Borders[set].GetComponent<BuildingBlock>();
         }
 
         if (startBlock.Borders[(int)dir] != null)
@@ -64,7 +74,7 @@ public class GameManager : MonoBehaviour {
                 count--;
                 if (check.Occupant != null)
                 {
-                    print("exiting");
+                    //print("exiting");
                     return false;
                     
                 }
@@ -73,7 +83,7 @@ public class GameManager : MonoBehaviour {
                 {
                     if (count != 0)
                     {
-                        print("exiting");
+                        //print("exiting");
                         return false;
                         
                     }
@@ -87,44 +97,64 @@ public class GameManager : MonoBehaviour {
             } while (count > 0);
         } else
         {
-            print("exiting");
+            //print("exiting");
             return false;
             
 
         }
-        //if (startBlock.Borders[(int)dir] != null)
-        //{
-        //    //BuildingBlock check = startBlock.Borders[(int)dir].GetComponent<BuildingBlock>();
-        //    int set = ((int)dir + 1) % 4;
-        //    for (int i = 0; i < count; i++)
-        //    {
-        //        if (check.Occupant != null || (check.Borders[set] == null && i + 1 < count))
-        //        {
-        //            if (check.Occupant != null)
-        //            {
-        //                print("exiting");
-        //            } else if(check.Borders[set] == null)
-        //            {
-        //                print("exiting");
-
-        //            }
-        //            return false;
-        //        }
-        //        else
-        //        {
-        //            if (check.Borders[set] != null)
-        //            {
-        //                check = check.Borders[set].GetComponent<BuildingBlock>();
-        //            }
-        //        }
-        //    }
-        //} else
-        //{
-        //    print("exiting");
-        //    return false;
-        //}
 
         return true;
+    }
+
+    public void move(Furniture block, Direction dir)
+    {
+        BuildingBlock movingTo = block.OriginSquare.GetComponent<BuildingBlock>().Borders[(int)dir].GetComponent<BuildingBlock>();
+        BuildingBlock topBlock = block.OriginSquare.GetComponent<BuildingBlock>();
+        BuildingBlock currentBlock = topBlock;
+        for (int x = 0; x < block.width; x++)
+        {
+            for (int y = 0; y < block.length; y++)
+            {
+                currentBlock.GetComponent<BuildingBlock>().Occupant = null;
+                if (currentBlock.Borders[((int)block.facing + 1) % 4])
+                {
+                    currentBlock = currentBlock.Borders[((int)block.facing + 1) % 4].GetComponent<BuildingBlock>();
+                    currentBlock.GetComponent<BuildingBlock>().Occupant = null;
+                }
+            }
+            if (topBlock.Borders[(int)block.facing] != null)
+            {
+                topBlock = topBlock.Borders[(int)block.facing].GetComponent<BuildingBlock>();
+            }
+            currentBlock = topBlock;
+        }
+
+        topBlock = movingTo;
+        currentBlock = topBlock;
+
+        for (int x = 0; x < block.width; x++)
+        {
+            for (int y = 0; y < block.length; y++)
+            {
+                currentBlock.GetComponent<BuildingBlock>().Occupant = block.gameObject;
+                if (currentBlock.Borders[((int)block.facing + 1) % 4])
+                {
+                    currentBlock = currentBlock.Borders[((int)block.facing + 1) % 4].GetComponent<BuildingBlock>();
+                    currentBlock.GetComponent<BuildingBlock>().Occupant = block.gameObject;
+                }
+            }
+            if (topBlock.Borders[(int)block.facing] != null)
+            {
+                topBlock = topBlock.Borders[(int)block.facing].GetComponent<BuildingBlock>();
+            }
+            currentBlock = topBlock;
+        }
+
+
+        movingTo.Occupant = block.gameObject;
+        block.OriginSquare = movingTo.gameObject;
+        block.gameObject.transform.position = new Vector3(movingTo.transform.position.x, block.gameObject.transform.position.y, movingTo.transform.position.z);
+        //block.gameObject.transform.RotateAround(movingTo.gameObject.transform.position, Vector3.up, 90 * (int)block.facing);
     }
 }
 

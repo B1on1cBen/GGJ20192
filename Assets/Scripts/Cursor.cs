@@ -16,6 +16,7 @@ public class Cursor : MonoBehaviour
 {
     GameManager gameManager;
     BuildingBlock currentBlock;
+    public Furniture possesedFurniture = null;
 
     [SerializeField] string rotateLeftButton;
     [SerializeField] string rotateRightButton;
@@ -53,8 +54,15 @@ public class Cursor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            currentBlock.gameObject.AddComponent<PossesionScript>();
-            enabled = false;
+            if (possesedFurniture == null)
+            {
+                if (currentBlock.Occupant != null)
+                {
+                    possesedFurniture = currentBlock.Occupant.GetComponent<Furniture>();
+                }
+            } else {
+                possesedFurniture = null;
+            }
         }
     }
 
@@ -112,9 +120,41 @@ public class Cursor : MonoBehaviour
 
             if (wantedPosition != currentBlock.transform.position)
             {
-                currentBlock.GetComponent<Renderer>().material = gridMaterial;
-                currentBlock = currentBlock.GetNeighbor(newH, -newV);
-                currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;
+                
+                if (possesedFurniture != null)
+                {
+                    Direction dir = Direction.North;
+                    if(v == 1)
+                    {
+                        dir = Direction.South;
+                    } else if(h == 1)
+                    {
+                        dir = Direction.East;
+                    } else if(v == -1)
+                    {
+                        dir = Direction.North;
+                    } else if(h == -1)
+                    {
+                        dir = Direction.West;
+                    }
+                    print(dir);
+                    if(GameManager.manager.canMove(possesedFurniture, dir))
+                    {
+                        print("moving");
+                        currentBlock.GetComponent<Renderer>().material = gridMaterial;
+                        currentBlock = currentBlock.GetNeighbor(newH, -newV);
+                        currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;
+                        GameManager.manager.move(possesedFurniture, dir);
+                    } else
+                    {
+                        print("blocked");
+                    }
+                } else
+                {
+                    currentBlock.GetComponent<Renderer>().material = gridMaterial;
+                    currentBlock = currentBlock.GetNeighbor(newH, -newV);
+                    currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;
+                }
             }
         }
 

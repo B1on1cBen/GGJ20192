@@ -82,8 +82,8 @@ public class RoomGenerationScript : MonoBehaviour {
             }
 
             furniture.gameObject.transform.position = new Vector3(currentBlock.transform.position.x, furniture.gameObject.transform.position.y, currentBlock.transform.position.z);
-            furniture.gameObject.transform.rotation = new Quaternion(furniture.gameObject.transform.rotation.x, 90 * (int)furniture.facing, furniture.gameObject.transform.rotation.z, furniture.gameObject.transform.rotation.w);
-            
+            furniture.gameObject.transform.RotateAround(furniture.gameObject.transform.position, Vector3.up, 90 * (int)furniture.facing);
+
             BuildingBlock originBlock = currentBlock.GetComponent<BuildingBlock>();
             originBlock.Occupant = furniture.gameObject;
             GameObject topBlock = originBlock.gameObject;

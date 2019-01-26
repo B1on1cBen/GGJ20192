@@ -141,10 +141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a367d29e1c10cc4cb20ce91a4c3fe5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xLength: 3
-  yLength: 3
+  xLength: 10
+  yLength: 10
   furniture:
   - {fileID: 746541750}
+  - {fileID: 861670423}
   topLeft: {fileID: 0}
 --- !u!114 &310222916
 MonoBehaviour:
@@ -294,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OriginSquare: {fileID: 0}
-  facing: 0
+  facing: 3
   length: 2
   width: 1
 --- !u!1 &797081868
@@ -403,7 +404,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 3449448de5322d641a6ae80123999d0b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3449448de5322d641a6ae80123999d0b, type: 3}
@@ -438,8 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56176e76688d5b94aab5623d331ef050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
+  x: 5
+  y: 5
 --- !u!1001 &1011845133
 Prefab:
   m_ObjectHideFlags: 0

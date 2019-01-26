@@ -156,6 +156,37 @@ public class GameManager : MonoBehaviour {
         block.gameObject.transform.position = new Vector3(movingTo.transform.position.x, block.gameObject.transform.position.y, movingTo.transform.position.z);
         //block.gameObject.transform.RotateAround(movingTo.gameObject.transform.position, Vector3.up, 90 * (int)block.facing);
     }
+
+    public bool canRotate(Furniture block, Direction dir)
+    {
+        print(block.gameObject.name);
+        print(dir);
+        BuildingBlock topBlock = block.OriginSquare.GetComponent<BuildingBlock>();
+        BuildingBlock currentBlock = topBlock;
+        for (int x = 0; x < block.width; x++)
+        {
+            print(x);
+            for (int y = 1; y < block.length; y++)
+            {
+                currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[((int)block.facing + (int)dir + 1) % 4].GetComponent<BuildingBlock>();
+            }
+
+            if ((currentBlock.Occupant != null && currentBlock.Occupant != block.gameObject))
+            {
+                return false;
+            }
+            else if(topBlock.GetComponent<BuildingBlock>().Borders[((int)block.facing + (int)dir) % 4] == null)
+            {
+                return false;
+            } else
+            {
+                topBlock = topBlock.GetComponent<BuildingBlock>().Borders[((int)block.facing + (int)dir) % 4].GetComponent<BuildingBlock>();
+                currentBlock = topBlock;
+            }
+        }
+
+        return true;
+    }
 }
 
 public enum Direction

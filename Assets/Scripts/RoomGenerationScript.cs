@@ -6,27 +6,17 @@ public class RoomGenerationScript : MonoBehaviour {
 
     public GameObject GenericBuildingBlock;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void generate(int x, int y)
     {
         GameObject currentBlock = Instantiate(GenericBuildingBlock);
         GameManager.manager.topLeft = currentBlock;
         GameObject topLeft = currentBlock;
 
-        for(int i = 0; i < x; i++)
+        for (int i = 0; i < x; i++)
         {
             currentBlock = topLeft;
 
-            while(currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] != null)
+            while (currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] != null)
             {
                 currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
             }
@@ -35,6 +25,7 @@ public class RoomGenerationScript : MonoBehaviour {
             newBlock.transform.position = new Vector3(currentBlock.transform.position.x + newBlock.transform.localScale.x, currentBlock.transform.position.y, currentBlock.transform.position.z);
             currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] = newBlock;
             newBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.West] = currentBlock;
+
             currentBlock = newBlock;
 
             for (int j = 1; j < y; j++)
@@ -47,6 +38,32 @@ public class RoomGenerationScript : MonoBehaviour {
             }
         }
 
+        GameManager.manager.topLeft = GameManager.manager.topLeft.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
+
+        currentBlock = GameManager.manager.topLeft;
+        for(int i = 0; i < x; i++)
+        {
+            GameObject next = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
+            if (currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] != null)
+            {
+                while (next.GetComponent<BuildingBlock>().Borders[(int)Direction.South] != null)
+                {
+                    currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.South];
+                    next = next.GetComponent<BuildingBlock>().Borders[(int)Direction.South];
+                    print(currentBlock.name);
+                    currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] = next;
+                    next.GetComponent<BuildingBlock>().Borders[(int)Direction.West] = currentBlock;
+                }
+
+                while (currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.North] != null)
+                {
+                    currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.North];
+                }
+
+                currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
+            }
+        }
+
         GenericBuildingBlock.SetActive(false);
         GameManager.manager.topLeft = topLeft.GetComponent<BuildingBlock>().Borders[1];
         Destroy(topLeft.gameObject);
@@ -55,37 +72,30 @@ public class RoomGenerationScript : MonoBehaviour {
         {
             currentBlock = GameManager.manager.topLeft;
 
-            for (int i = 0; i < furniture.gameObject.GetComponent<SpawningOrigin>().x; i++)
+            for (int i = 1; i < furniture.gameObject.GetComponent<SpawningOrigin>().x; i++)
             {
                 currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
             }
-            for (int i = 0; i < furniture.gameObject.GetComponent<SpawningOrigin>().y; i++)
+            for (int i = 1; i < furniture.gameObject.GetComponent<SpawningOrigin>().y; i++)
             {
                 currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.South];
             }
 
             BuildingBlock originBlock = currentBlock.GetComponent<BuildingBlock>();
             originBlock.Occupant = furniture.gameObject;
+            GameObject topBlock = originBlock.gameObject;
+            furniture.OriginSquare = topBlock;
 
-            for(x = 1; x < furniture.length; x++)
+            for (x = 0; x < furniture.width; x++)
             {
-                //currentBlock.Occupant
-            }
-
-            for (int i = 1; i <= furniture.length; i++)
-            {
-                currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(/*(int)furniture.facing +*/ (int)Direction.East) % 4];
-                currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
-                GameObject startingBlock = currentBlock;
-                furniture.OriginSquare = startingBlock;
-                for (int j = 1; j <= furniture.width; j++)
+                for (y = 0; y < furniture.length; y++)
                 {
-                    currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(/*(int)furniture.facing +*/ (int)Direction.South) % 4];
                     currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
+                    currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)furniture.facing];
                 }
-                currentBlock = startingBlock;
+                topBlock = topBlock.GetComponent<BuildingBlock>().Borders[(int)furniture.facing];
+                currentBlock = topBlock;
             }
-            //Destroy(furniture.gameObject.GetComponent<SpawningOrigin>());
         }
     }
 }

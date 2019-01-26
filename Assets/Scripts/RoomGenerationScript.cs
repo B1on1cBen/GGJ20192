@@ -50,7 +50,7 @@ public class RoomGenerationScript : MonoBehaviour {
                 {
                     currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.South];
                     next = next.GetComponent<BuildingBlock>().Borders[(int)Direction.South];
-                    print(currentBlock.name);
+                    //print(currentBlock.name);
                     currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East] = next;
                     next.GetComponent<BuildingBlock>().Borders[(int)Direction.West] = currentBlock;
                 }
@@ -66,6 +66,7 @@ public class RoomGenerationScript : MonoBehaviour {
 
         GenericBuildingBlock.SetActive(false);
         GameManager.manager.topLeft = topLeft.GetComponent<BuildingBlock>().Borders[1];
+        GameManager.manager.topLeft.GetComponent<BuildingBlock>().Borders[(int)Direction.West] = null;
         Destroy(topLeft.gameObject);
 
         foreach (Furniture furniture in GameManager.manager.furniture)
@@ -94,11 +95,17 @@ public class RoomGenerationScript : MonoBehaviour {
                 for (y = 0; y < furniture.length; y++)
                 {
                     currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
-                    currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(int)furniture.facing];
+                    currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[((int)furniture.facing + 1) % 4];
+                    if (currentBlock != null)
+                    {
+                        currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
+                    }
                 }
                 topBlock = topBlock.GetComponent<BuildingBlock>().Borders[(int)furniture.facing];
                 currentBlock = topBlock;
             }
         }
+
+        //print(GameManager.manager.canMove(GameManager.manager.furniture[0], GameManager.manager.furniture[0].GetComponent<Furniture>().facing));
     }
 }

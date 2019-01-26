@@ -67,6 +67,11 @@ public class RoomGenerationScript : MonoBehaviour {
             BuildingBlock originBlock = currentBlock.GetComponent<BuildingBlock>();
             originBlock.Occupant = furniture.gameObject;
 
+            for(x = 1; x < furniture.length; x++)
+            {
+                //currentBlock.Occupant
+            }
+
             for (int i = 1; i <= furniture.length; i++)
             {
                 currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[(/*(int)furniture.facing +*/ (int)Direction.East) % 4];

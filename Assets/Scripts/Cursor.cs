@@ -124,16 +124,16 @@ public class Cursor : MonoBehaviour
                 if (possesedFurniture != null)
                 {
                     Direction dir = Direction.North;
-                    if(v == 1)
+                    if(newV == 1)
                     {
                         dir = Direction.South;
-                    } else if(h == 1)
+                    } else if(newH == 1)
                     {
                         dir = Direction.East;
-                    } else if(v == -1)
+                    } else if(newV == -1)
                     {
                         dir = Direction.North;
-                    } else if(h == -1)
+                    } else if(newH == -1)
                     {
                         dir = Direction.West;
                     }
@@ -141,10 +141,10 @@ public class Cursor : MonoBehaviour
                     if(GameManager.manager.canMove(possesedFurniture, dir))
                     {
                         print("moving");
-                        currentBlock.GetComponent<Renderer>().material = gridMaterial;
-                        currentBlock = currentBlock.GetNeighbor(newH, -newV);
-                        currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;
                         GameManager.manager.move(possesedFurniture, dir);
+                        currentBlock.GetComponent<Renderer>().material = gridMaterial;
+                        currentBlock = possesedFurniture.OriginSquare.GetComponent<BuildingBlock>();
+                        currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;
                     } else
                     {
                         print("blocked");

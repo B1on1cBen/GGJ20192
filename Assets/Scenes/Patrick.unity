@@ -440,7 +440,7 @@ MonoBehaviour:
   OriginSquare: {fileID: 0}
   facing: 3
   length: 2
-  width: 2
+  width: 1
 --- !u!114 &861670424
 MonoBehaviour:
   m_ObjectHideFlags: 0

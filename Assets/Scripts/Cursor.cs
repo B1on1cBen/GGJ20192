@@ -22,6 +22,8 @@ public class Cursor : MonoBehaviour
     [SerializeField] float rotateSpeed = 10;
     [SerializeField] float moveInterval = .75f;
     [SerializeField] float moveSpeed = 10;
+    [SerializeField] Material gridMaterial;
+    [SerializeField] Material selectedGridMaterial;
 
     float wantedYRot;
     float moveTimer;
@@ -35,6 +37,7 @@ public class Cursor : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         gameManager.generate();
         currentBlock = gameManager.topLeft.GetComponent<BuildingBlock>();
+        currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;
         transform.position = currentBlock.transform.position;
         wantedPosition = transform.position;
     }
@@ -56,6 +59,20 @@ public class Cursor : MonoBehaviour
             int newV = v;
 
             int rotY = (int)Quaternion.Euler(new Vector3(0, wantedYRot, 0)).eulerAngles.y;
+
+            Debug.Log("Rot Y: " + rotY);
+
+            if (rotY >= 85 && rotY <= 95)
+                rotY = 90;
+
+            if (rotY >= 175 && rotY <= 185)
+                rotY = 180;
+
+            if (rotY >= 265 && rotY <= 275)
+                rotY = 270;
+
+            if (rotY >= 0 && rotY <= 5)
+                rotY = 0;
 
             switch (rotY)
             {
@@ -82,7 +99,11 @@ public class Cursor : MonoBehaviour
             wantedPosition = currentBlock.GetNeighborPosition(newH, -newV);
 
             if (wantedPosition != currentBlock.transform.position)
+            {
+                currentBlock.GetComponent<Renderer>().material = gridMaterial;
                 currentBlock = currentBlock.GetNeighbor(newH, -newV);
+                currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;
+            }
         }
 
         transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * moveSpeed);

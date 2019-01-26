@@ -22,6 +22,10 @@ public class Cursor : MonoBehaviour
     [SerializeField] float rotateSpeed = 10;
     [SerializeField] float moveInterval = .75f;
     [SerializeField] float moveSpeed = 10;
+    [SerializeField] AudioSource turnSource;
+    [SerializeField] AudioSource moveSource;
+    [SerializeField] AudioClip turnSound;
+    [SerializeField] AudioClip moveSound;
     [SerializeField] Material gridMaterial;
     [SerializeField] Material selectedGridMaterial;
 
@@ -50,7 +54,7 @@ public class Cursor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             currentBlock.gameObject.AddComponent<PossesionScript>();
-            this.enabled = false;
+            enabled = false;
         }
     }
 
@@ -61,12 +65,14 @@ public class Cursor : MonoBehaviour
 
         if ((h != 0 || v != 0) && (previousH != h || previousV != v))
         {
+            moveSource.PlayOneShot(moveSound);
+
             int newH = h;
             int newV = v;
 
             int rotY = (int)Quaternion.Euler(new Vector3(0, wantedYRot, 0)).eulerAngles.y;
 
-            Debug.Log("Rot Y: " + rotY);
+            //Debug.Log("Rot Y: " + rotY);
 
             if (rotY >= 85 && rotY <= 95)
                 rotY = 90;
@@ -123,11 +129,13 @@ public class Cursor : MonoBehaviour
         if (Input.GetButtonDown(rotateLeftButton))
         {
             wantedYRot += 90;
+            turnSource.PlayOneShot(turnSound);
         }
 
         if (Input.GetButtonDown(rotateRightButton))
         {
             wantedYRot -= 90;
+            turnSource.PlayOneShot(turnSound);
         }
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles.x, wantedYRot, 0), rotateSpeed * Time.deltaTime);

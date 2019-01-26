@@ -92,7 +92,7 @@ public class RoomGenerationScript : MonoBehaviour {
 
             for (x = 0; x < furniture.width; x++)
             {
-                for (y = 0; y < furniture.length; y++)
+                for (y = 1; y < furniture.length; y++)
                 {
                     currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
                     currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[((int)furniture.facing + 1) % 4];

@@ -134,18 +134,18 @@ public class GameManager : MonoBehaviour {
 
         for (int x = 0; x < block.width; x++)
         {
-            for (int y = 0; y < block.length; y++)
+            for (int y = 1; y < block.length; y++)
             {
                 currentBlock.GetComponent<BuildingBlock>().Occupant = block.gameObject;
-                if (currentBlock.Borders[((int)block.facing + 1) % 4])
+                currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[((int)block.facing + 1) % 4].GetComponent<BuildingBlock>();
+                if (currentBlock != null)
                 {
-                    currentBlock = currentBlock.Borders[((int)block.facing + 1) % 4].GetComponent<BuildingBlock>();
                     currentBlock.GetComponent<BuildingBlock>().Occupant = block.gameObject;
                 }
             }
-            if (topBlock.Borders[(int)block.facing] != null)
+            if (topBlock.GetComponent<BuildingBlock>().Borders[(int)block.facing] != null)
             {
-                topBlock = topBlock.Borders[(int)block.facing].GetComponent<BuildingBlock>();
+                topBlock = topBlock.GetComponent<BuildingBlock>().Borders[(int)block.facing].GetComponent<BuildingBlock>();
             }
             currentBlock = topBlock;
         }

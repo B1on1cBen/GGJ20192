@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920001072005452}
   m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 5.69, z: -8.29}
+  m_LocalPosition: {x: 0, y: 3.61, z: -2.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4251071363171598}
@@ -127,4 +127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateLeftButton: RotateLeft
   rotateRightButton: RotateRight
-  rotateSpeed: 1
+  rotateSpeed: 10
+  moveInterval: 0.75
+  moveSpeed: 10
+  gridMaterial: {fileID: 2100000, guid: 5f5f123174c746344ad3635ac4fb2854, type: 2}
+  selectedGridMaterial: {fileID: 2100000, guid: d6e6658c3b98d7849bf0d667b7b67555,
+    type: 2}

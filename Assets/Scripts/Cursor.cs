@@ -42,10 +42,15 @@ public class Cursor : MonoBehaviour
     void Update()
     {
         Rotate();
+        Move();
+    }
+
+    private void Move()
+    {
         int h = (int)Input.GetAxisRaw("Horizontal");
         int v = (int)Input.GetAxisRaw("Vertical");
 
-        if (h != 0 || v != 0)
+        if ((h != 0 || v != 0) && (previousH != h || previousV != v))
         {
             int newH = h;
             int newV = v;
@@ -71,7 +76,7 @@ public class Cursor : MonoBehaviour
 
                 case 0:
                 default:
-                    break;              
+                    break;
             }
 
             wantedPosition = currentBlock.GetNeighborPosition(newH, -newV);
@@ -81,6 +86,9 @@ public class Cursor : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * moveSpeed);
+
+        previousH = h;
+        previousV = v;
     }
 
     void Rotate()

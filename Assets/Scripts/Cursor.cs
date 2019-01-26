@@ -46,6 +46,12 @@ public class Cursor : MonoBehaviour
     {
         Rotate();
         Move();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            currentBlock.gameObject.AddComponent<PossesionScript>();
+            this.enabled = false;
+        }
     }
 
     private void Move()

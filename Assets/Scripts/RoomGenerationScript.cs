@@ -6,10 +6,16 @@ public class RoomGenerationScript : MonoBehaviour {
 
     public GameObject GenericBuildingBlock;
 
+    private void Awake()
+    {
+        GetComponent<GameManager>().generate();
+    }
+
     public void generate(int x, int y)
     {
+        GameManager gameManager = GetComponent<GameManager>();
         GameObject currentBlock = Instantiate(GenericBuildingBlock);
-        GameManager.manager.topLeft = currentBlock;
+        gameManager.topLeft = currentBlock;
         GameObject topLeft = currentBlock;
 
         for (int i = 0; i < x; i++)
@@ -38,9 +44,9 @@ public class RoomGenerationScript : MonoBehaviour {
             }
         }
 
-        GameManager.manager.topLeft = GameManager.manager.topLeft.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
+        gameManager.topLeft = gameManager.topLeft.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
 
-        currentBlock = GameManager.manager.topLeft;
+        currentBlock = gameManager.topLeft;
         for(int i = 0; i < x; i++)
         {
             GameObject next = currentBlock.GetComponent<BuildingBlock>().Borders[(int)Direction.East];
@@ -65,13 +71,13 @@ public class RoomGenerationScript : MonoBehaviour {
         }
 
         GenericBuildingBlock.SetActive(false);
-        GameManager.manager.topLeft = topLeft.GetComponent<BuildingBlock>().Borders[1];
-        GameManager.manager.topLeft.GetComponent<BuildingBlock>().Borders[(int)Direction.West] = null;
+        gameManager.topLeft = topLeft.GetComponent<BuildingBlock>().Borders[1];
+        gameManager.topLeft.GetComponent<BuildingBlock>().Borders[(int)Direction.West] = null;
         Destroy(topLeft.gameObject);
 
-        foreach (Furniture furniture in GameManager.manager.furniture)
+        foreach (Furniture furniture in gameManager.furniture)
         {
-            currentBlock = GameManager.manager.topLeft;
+            currentBlock = gameManager.topLeft;
 
             for (int i = 1; i < furniture.gameObject.GetComponent<SpawningOrigin>().x; i++)
             {
@@ -113,8 +119,6 @@ public class RoomGenerationScript : MonoBehaviour {
                 topBlock = topBlock.GetComponent<BuildingBlock>().Borders[(int)furniture.facing];
                 currentBlock = topBlock;
             }
-
-            furniture.init();
         }
 
         //print(GameManager.manager.canMove(GameManager.manager.furniture[0], GameManager.manager.furniture[0].GetComponent<Furniture>().facing));

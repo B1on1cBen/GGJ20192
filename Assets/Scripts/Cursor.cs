@@ -49,7 +49,6 @@ public class Cursor : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        gameManager.generate();
         currentBlock = gameManager.topLeft.GetComponent<BuildingBlock>();
         currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;
         transform.position = currentBlock.transform.position;
@@ -154,12 +153,12 @@ public class Cursor : MonoBehaviour
                         dir = Direction.West;
                     }
                     print(dir);
-                    GameManager.manager.GetComponent<WinningScript>().winCheck();
-                    if(GameManager.manager.canMove(possesedFurniture, dir))
+                    gameManager.GetComponent<WinningScript>().winCheck();
+                    if(gameManager.canMove(possesedFurniture, dir))
                     {
                         print("moving");
                         furnitureSource.PlayRandomClip(furnitureSounds);
-                        GameManager.manager.move(possesedFurniture, dir);
+                        gameManager.move(possesedFurniture, dir);
                         currentBlock.GetComponent<Renderer>().material = gridMaterial;
                         currentBlock = possesedFurniture.OriginSquare.GetComponent<BuildingBlock>();
                         currentBlock.GetComponent<Renderer>().material = selectedGridMaterial;

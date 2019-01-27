@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public static GameManager manager;
-
     public int xLength;
     public int yLength;
 
@@ -18,7 +16,7 @@ public class GameManager : MonoBehaviour {
         GetComponent<RoomGenerationScript>().generate(xLength, yLength);
     }
 
-    public int ConvertXYToNeighborIndex(int x, int y)
+    public static int ConvertXYToNeighborIndex(int x, int y)
     {
         if (y == 1)
             return 0;

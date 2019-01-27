@@ -15,18 +15,12 @@ public class Furniture : MonoBehaviour {
 
     public BuildingBlock WinningPosition;
 
+    GameManager gameManager;
+
     // Use this for initialization
     void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-     public void init()
-    {
-        WinningPosition = GameManager.manager.topLeft.GetComponent<BuildingBlock>();
+        gameManager = FindObjectOfType<GameManager>();
+        WinningPosition = gameManager.topLeft.GetComponent<BuildingBlock>();
         for (int i = 0; i < WinningX; i++)
         {
             WinningPosition = WinningPosition.Borders[(int)Direction.East].GetComponent<BuildingBlock>();
@@ -36,4 +30,9 @@ public class Furniture : MonoBehaviour {
             WinningPosition = WinningPosition.Borders[(int)Direction.South].GetComponent<BuildingBlock>();
         }
     }
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 }

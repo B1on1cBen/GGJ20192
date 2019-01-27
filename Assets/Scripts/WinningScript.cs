@@ -9,14 +9,17 @@ public class WinningScript : MonoBehaviour {
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip winningSound;
 
+    GameManager gameManager;
+
 	// Use this for initialization
 	void Start () {
+        gameManager = FindObjectOfType<GameManager>();
         source = GetComponent<AudioSource>();
 	}
 
     public void winCheck()
     {
-        foreach(Furniture furniture in GameManager.manager.furniture)
+        foreach(Furniture furniture in gameManager.furniture)
         {
             if (furniture.WinningPosition.gameObject != furniture.OriginSquare)
             {

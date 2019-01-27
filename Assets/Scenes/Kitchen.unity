@@ -1320,7 +1320,7 @@ MonoBehaviour:
   length: 1
   width: 1
   WinningX: 1
-  WinningY: 1
+  WinningY: 0
   OriginSquare: {fileID: 0}
   WinningPosition: {fileID: 0}
 --- !u!114 &1944931950

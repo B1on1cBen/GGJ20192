@@ -6,6 +6,7 @@ public class ButtonSoundPlayer : MonoBehaviour
     [SerializeField] AudioClip forwardSound;
     [SerializeField] AudioClip backSound;
     [SerializeField] AudioClip hoverSound;
+    [SerializeField] AudioClip winningSound;
 
     AudioSource audioSource;
 

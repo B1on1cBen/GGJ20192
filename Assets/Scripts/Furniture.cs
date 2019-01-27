@@ -10,6 +10,8 @@ public class Furniture : MonoBehaviour {
     public int length = 1;
     public int width = 1;
 
+    public BuildingBlock WinningPosition;
+
 	// Use this for initialization
 	void Start () {
 		

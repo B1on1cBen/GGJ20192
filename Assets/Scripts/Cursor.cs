@@ -154,6 +154,7 @@ public class Cursor : MonoBehaviour
                         dir = Direction.West;
                     }
                     print(dir);
+                    GameManager.manager.GetComponent<WinningScript>().winCheck();
                     if(GameManager.manager.canMove(possesedFurniture, dir))
                     {
                         print("moving");

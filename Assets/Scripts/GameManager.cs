@@ -11,18 +11,6 @@ public class GameManager : MonoBehaviour {
 
     public List<Furniture> furniture = new List<Furniture>();
 
-    private void Awake()
-    { 
-        if(manager == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            manager = this;
-        } else if(manager != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public GameObject topLeft;
 
     public void generate()

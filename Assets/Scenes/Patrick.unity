@@ -439,7 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OriginSquare: {fileID: 0}
   facing: 3
-  length: 2
+  length: 1
   width: 1
 --- !u!114 &861670424
 MonoBehaviour:

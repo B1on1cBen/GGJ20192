@@ -204,9 +204,10 @@ public class GameManager : MonoBehaviour {
 
         startBlock = block.OriginSquare.GetComponent<BuildingBlock>();
         lst = new List<BuildingBlock>();
+        lst.Add(movingTo);
         subLst = new List<BuildingBlock>();
         currentBlock = startBlock;
-        for (int i = 0; i < block.width; i++)
+        for (int i = 1; i < block.width; i++)
         {
             lst.Add(currentBlock);
             if (currentBlock.Borders[(int)Direction.East] != null)

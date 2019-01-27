@@ -90,9 +90,18 @@ public class RoomGenerationScript : MonoBehaviour {
             GameObject topBlock = originBlock.gameObject;
             furniture.OriginSquare = topBlock;
 
-            for (x = 0; x < furniture.width; x++)
+            int horz = furniture.width;
+            int vert = furniture.length;
+
+            //if (furniture.facing == Direction.East || furniture.facing == Direction.West)
+            //{
+            //    horz = furniture.length;
+            //    vert = furniture.width;
+            //}
+
+            for (x = 0; x < horz; x++)
             {
-                for (y = 1; y < furniture.length; y++)
+                for (y = 1; y < vert; y++)
                 {
                     currentBlock.GetComponent<BuildingBlock>().Occupant = furniture.gameObject;
                     currentBlock = currentBlock.GetComponent<BuildingBlock>().Borders[((int)furniture.facing + 1) % 4];
@@ -104,6 +113,8 @@ public class RoomGenerationScript : MonoBehaviour {
                 topBlock = topBlock.GetComponent<BuildingBlock>().Borders[(int)furniture.facing];
                 currentBlock = topBlock;
             }
+
+            furniture.init();
         }
 
         //print(GameManager.manager.canMove(GameManager.manager.furniture[0], GameManager.manager.furniture[0].GetComponent<Furniture>().facing));

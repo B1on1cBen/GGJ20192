@@ -49,6 +49,15 @@ public class GameManager : MonoBehaviour {
 
     public bool canMove(Furniture block, Direction dir)
     {
+        int horz = block.width;
+        int vert = block.length;
+
+        if(block.facing == Direction.North)
+        {
+            int temp = horz;
+            horz = vert;
+            vert = temp;
+        }
         //how many spots to check
         //int count = 1;
         //if(dir == Direction.North || dir == Direction.South)
@@ -64,7 +73,7 @@ public class GameManager : MonoBehaviour {
         List<BuildingBlock> lst = new List<BuildingBlock>();
         List<BuildingBlock> subLst = new List<BuildingBlock>();
         BuildingBlock currentBlock = startBlock;
-        for(int i = 0; i < block.width; i++)
+        for(int i = 0; i < horz; i++)
         {
             lst.Add(currentBlock);
             if (currentBlock.Borders[(int)Direction.East] != null)
@@ -76,7 +85,7 @@ public class GameManager : MonoBehaviour {
         foreach (BuildingBlock top in lst)
         {
             currentBlock = top;
-            for (int i = 1; i < block.length; i++)
+            for (int i = 1; i < vert; i++)
             {
                 if (currentBlock.Borders[(int)Direction.South] != null)
                 {
@@ -106,56 +115,22 @@ public class GameManager : MonoBehaviour {
             }
         }
 
-       // while(startBlock.Borders[(int)dir] != null && startBlock.Borders[(int)dir].GetComponent<BuildingBlock>().Occupant == block.gameObject)
-       // {
-       //     startBlock = startBlock.Borders[(int)dir].GetComponent<BuildingBlock>();
-       // }
-       // int set = ((int)dir+1)%4;
-       //// set = (set == -1) ? 3 : set;
-       // while (startBlock.Borders[set] != null && startBlock.Borders[set].GetComponent<BuildingBlock>().Occupant == block.gameObject)
-       // {
-       //     startBlock = startBlock.Borders[set].GetComponent<BuildingBlock>();
-       // }
-
-       // if (startBlock.Borders[(int)dir] != null)
-       // {
-       //     BuildingBlock check = startBlock.Borders[(int)dir].GetComponent<BuildingBlock>();
-       //     do
-       //     {
-       //         count--;
-       //         if (check.Occupant != null)
-       //         {
-       //             //print("exiting");
-       //             return false;
-                    
-       //         }
-
-       //         if (check.Borders[((int)dir + 1) % 4] == null)
-       //         {
-       //             if (count != 0)
-       //             {
-       //                 //print("exiting");
-       //                 return false;
-                        
-       //             }
-       //         }
-       //         else
-       //         {
-       //             check = check.Borders[((int)dir + 1) % 4].GetComponent<BuildingBlock>();
-       //         }
-                
-       //     } while (count > 0);
-       // } else
-       // {
-       //     //print("exiting");
-       //     return false;
-       // }
-
         return true;
     }
 
     public void move(Furniture block, Direction dir)
     {
+
+        int horz = block.width;
+        int vert = block.length;
+
+        if (block.facing == Direction.North)
+        {
+            int temp = horz;
+            horz = vert;
+            vert = temp;
+        }
+
         BuildingBlock movingTo = block.OriginSquare.GetComponent<BuildingBlock>().Borders[(int)dir].GetComponent<BuildingBlock>();
         BuildingBlock topBlock = block.OriginSquare.GetComponent<BuildingBlock>();
 
@@ -163,7 +138,7 @@ public class GameManager : MonoBehaviour {
         List<BuildingBlock> lst = new List<BuildingBlock>();
         List<BuildingBlock> subLst = new List<BuildingBlock>();
         BuildingBlock currentBlock = startBlock;
-        for (int i = 0; i < block.width; i++)
+        for (int i = 0; i < horz; i++)
         {
             lst.Add(currentBlock);
             if (currentBlock.Borders[(int)Direction.East] != null)
@@ -175,7 +150,7 @@ public class GameManager : MonoBehaviour {
         foreach (BuildingBlock top in lst)
         {
             currentBlock = top;
-            for (int i = 1; i < block.length; i++)
+            for (int i = 1; i < vert; i++)
             {
                 if (currentBlock.Borders[(int)Direction.South] != null)
                 {
@@ -207,7 +182,7 @@ public class GameManager : MonoBehaviour {
         lst.Add(movingTo);
         subLst = new List<BuildingBlock>();
         currentBlock = startBlock;
-        for (int i = 1; i < block.width; i++)
+        for (int i = 0; i < horz; i++)
         {
             lst.Add(currentBlock);
             if (currentBlock.Borders[(int)Direction.East] != null)
@@ -219,7 +194,7 @@ public class GameManager : MonoBehaviour {
         foreach (BuildingBlock top in lst)
         {
             currentBlock = top;
-            for (int i = 1; i < block.length; i++)
+            for (int i = 1; i < vert; i++)
             {
                 if (currentBlock.Borders[(int)Direction.South] != null)
                 {

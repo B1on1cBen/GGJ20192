@@ -24,13 +24,18 @@ public class WinningScript : MonoBehaviour {
             }
         }
 
+        print("winning");
        StartCoroutine(Completed());
     }
 
     IEnumerator Completed()
     {
         source.PlayOneShot(winningSound);
-        yield return new WaitWhile(() => source.isPlaying);
+
+        while (source.isPlaying)
+        {         
+            yield return new WaitForEndOfFrame();
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

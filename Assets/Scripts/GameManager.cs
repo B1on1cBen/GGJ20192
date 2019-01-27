@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour {
 
         movingTo.Occupant = block.gameObject;
         block.OriginSquare = movingTo.gameObject;
-        block.gameObject.transform.position = new Vector3(movingTo.transform.position.x, block.gameObject.transform.position.y, movingTo.transform.position.z);
+        block.gameObject.transform.position = new Vector3(movingTo.transform.position.x + block.GetComponent<OffsetScript>().x, block.gameObject.transform.position.y + block.GetComponent<OffsetScript>().y, movingTo.transform.position.z + block.GetComponent<OffsetScript>().z);
 
         lst.Clear();
         subLst.Clear();

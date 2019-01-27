@@ -12,15 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Credits.unity
     guid: c12f914f318ff95459be6c6eea05d36c
   - enabled: 1
+    path: Assets/Scenes/Bathroom.unity
+    guid: 7b56fe2b7b0a524428253accc0c050cc
+  - enabled: 1
     path: Assets/Scenes/bedroom.unity
     guid: adb1b77963281114f8a9cfd9cbdf7265
   - enabled: 1
     path: Assets/Scenes/Kitchen.unity
     guid: ef768882d3bcbf14db41ab1752fc6e58
-  - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/3cdcec5b5cd4b5a4b9bc4189545770cf
-    guid: 3cdcec5b5cd4b5a4b9bc4189545770cf
   - enabled: 1
-    path: Assets/Scenes/LivingRoom.unity
-    guid: f46b3d4312171a0459fa71cf3c9c4adb
+    path: Assets/Scenes/Victory.unity
+    guid: 3cf5ffbe284e4f64d90d8f731fb23c90
   m_configObjects: {}

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ImageScript : MonoBehaviour {
-
+public class ImageScript : MonoBehaviour
+{
     bool active = false;
     public Image img;
 
@@ -13,9 +11,8 @@ public class ImageScript : MonoBehaviour {
             img.gameObject.SetActive(active);
     }
 
-    // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("TogglePhoto"))
         {
             active = !active;
             img.gameObject.SetActive(active);

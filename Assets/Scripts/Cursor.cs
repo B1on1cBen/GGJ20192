@@ -43,6 +43,7 @@ public class Cursor : MonoBehaviour
     float moveTimer;
     int previousH;
     int previousV;
+    float previousRotate;
 
     Vector3 wantedPosition;
 
@@ -60,7 +61,7 @@ public class Cursor : MonoBehaviour
         Rotate();
         Move();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             if (possesedFurniture == null)
             {
@@ -189,18 +190,16 @@ public class Cursor : MonoBehaviour
 
     void Rotate()
     {
-        if (Input.GetButtonDown(rotateLeftButton))
-        {
-            wantedYRot += 90;
-            turnSource.PlayOneShot(turnSound);
-        }
+        float rotate = Input.GetAxisRaw("Rotate");
 
-        if (Input.GetButtonDown(rotateRightButton))
+        if (Mathf.Abs(previousRotate) <= .1f && (rotate > .5f || rotate < -.5f))
         {
-            wantedYRot -= 90;
+            wantedYRot += 90 * Mathf.Sign(rotate);
             turnSource.PlayOneShot(turnSound);
         }
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles.x, wantedYRot, 0), rotateSpeed * Time.deltaTime);
+
+        previousRotate = rotate;
     }
 }

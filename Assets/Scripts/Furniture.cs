@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Furniture : MonoBehaviour {
-
-    public GameObject OriginSquare;
+public class Furniture : MonoBehaviour
+{
     public Direction facing = Direction.North;
 
     public int length = 1;
@@ -13,12 +10,13 @@ public class Furniture : MonoBehaviour {
     public int WinningX;
     public int WinningY;
 
-    public BuildingBlock WinningPosition;
+    [HideInInspector] public GameObject OriginSquare;
+    [HideInInspector] public BuildingBlock WinningPosition;
 
     GameManager gameManager;
 
-    // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         gameManager = FindObjectOfType<GameManager>();
         WinningPosition = gameManager.topLeft.GetComponent<BuildingBlock>();
         for (int i = 0; i < WinningX; i++)
@@ -30,9 +28,4 @@ public class Furniture : MonoBehaviour {
             WinningPosition = WinningPosition.Borders[(int)Direction.South].GetComponent<BuildingBlock>();
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

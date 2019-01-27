@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 0}
-  winningSound: {fileID: 8300000, guid: 55182d52bc3bdac4fbf34c15a8e71e61, type: 3}
+  winningSound: {fileID: 8300000, guid: 96d49090151142946a149c76721d347c, type: 3}
 --- !u!82 &703256428
 AudioSource:
   m_ObjectHideFlags: 0

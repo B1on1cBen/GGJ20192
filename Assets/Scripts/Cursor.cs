@@ -70,6 +70,10 @@ public class Cursor : MonoBehaviour
                     possessSource.PlayOneShot(possessSound);
                     possesedFurniture = currentBlock.Occupant.GetComponent<Furniture>();
                 }
+                else
+                {
+                    cantMoveSource.PlayOneShot(cantMoveSound);
+                }
             }
             else
             {
@@ -157,6 +161,7 @@ public class Cursor : MonoBehaviour
                     if(gameManager.canMove(possesedFurniture, dir))
                     {
                         print("moving");
+                        furnitureSource.Stop();
                         furnitureSource.PlayRandomClip(furnitureSounds);
                         gameManager.move(possesedFurniture, dir);
                         currentBlock.GetComponent<Renderer>().material = gridMaterial;

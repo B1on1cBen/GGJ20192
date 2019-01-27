@@ -615,7 +615,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 797a52c0eb6f17d4fa8067d0e99509ab, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.38
+  m_Volume: 0.33
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -730,6 +730,7 @@ MonoBehaviour:
   forwardSound: {fileID: 8300000, guid: 0821e4599c9d4a24c8e6794719768d0b, type: 3}
   backSound: {fileID: 8300000, guid: 550df9c6dc427e644bdb9f2e1fecd1e7, type: 3}
   hoverSound: {fileID: 8300000, guid: 896e9ba67fa2a8e42a7eec605e397373, type: 3}
+  winningSound: {fileID: 0}
 --- !u!82 &1836015464
 AudioSource:
   m_ObjectHideFlags: 0
@@ -741,7 +742,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.18
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Medley.Extensions;
 
 public struct Point
 {
@@ -18,6 +19,7 @@ public class Cursor : MonoBehaviour
     BuildingBlock currentBlock;
     public Furniture possesedFurniture = null;
 
+    [SerializeField] GhostMover ghost;
     [SerializeField] string rotateLeftButton;
     [SerializeField] string rotateRightButton;
     [SerializeField] float rotateSpeed = 10;
@@ -25,8 +27,15 @@ public class Cursor : MonoBehaviour
     [SerializeField] float moveSpeed = 10;
     [SerializeField] AudioSource turnSource;
     [SerializeField] AudioSource moveSource;
+    [SerializeField] AudioSource cantMoveSource;
+    [SerializeField] AudioSource possessSource;
+    [SerializeField] AudioSource furnitureSource;
+    [SerializeField] AudioClip[] furnitureSounds;
     [SerializeField] AudioClip turnSound;
     [SerializeField] AudioClip moveSound;
+    [SerializeField] AudioClip cantMoveSound;
+    [SerializeField] AudioClip possessSound;
+    [SerializeField] AudioClip unpossessSound;
     [SerializeField] Material gridMaterial;
     [SerializeField] Material selectedGridMaterial;
 
@@ -58,9 +67,15 @@ public class Cursor : MonoBehaviour
             {
                 if (currentBlock.Occupant != null)
                 {
+                    ghost.Possess();
+                    possessSource.PlayOneShot(possessSound);
                     possesedFurniture = currentBlock.Occupant.GetComponent<Furniture>();
                 }
-            } else {
+            }
+            else
+            {
+                ghost.Unpossess();
+                possessSource.PlayOneShot(unpossessSound);
                 possesedFurniture = null;
             }
         }
@@ -73,7 +88,8 @@ public class Cursor : MonoBehaviour
 
         if ((h != 0 || v != 0) && (previousH != h || previousV != v))
         {
-            moveSource.PlayOneShot(moveSound);
+            if (possesedFurniture == null)
+                moveSource.PlayOneShot(moveSound);
 
             int newH = h;
             int newV = v;
@@ -117,10 +133,10 @@ public class Cursor : MonoBehaviour
             }
 
             wantedPosition = currentBlock.GetNeighborPosition(newH, -newV);
+            ghost.MoveToPoint(wantedPosition);
 
             if (wantedPosition != currentBlock.transform.position)
-            {
-                
+            {           
                 if (possesedFurniture != null)
                 {
                     Direction dir = Direction.North;
@@ -141,6 +157,7 @@ public class Cursor : MonoBehaviour
                     if(GameManager.manager.canMove(possesedFurniture, dir))
                     {
                         print("moving");
+                        furnitureSource.PlayRandomClip(furnitureSounds);
                         GameManager.manager.move(possesedFurniture, dir);
                         currentBlock.GetComponent<Renderer>().material = gridMaterial;
                         currentBlock = possesedFurniture.OriginSquare.GetComponent<BuildingBlock>();
@@ -148,6 +165,7 @@ public class Cursor : MonoBehaviour
                     } else
                     {
                         print("blocked");
+                        cantMoveSource.PlayOneShot(cantMoveSound);
                     }
                 } else
                 {

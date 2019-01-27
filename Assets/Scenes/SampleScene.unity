@@ -751,11 +751,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!4 &1130915255 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4251071363171598, guid: 4ca8d5ee95844614bb0e0b2198d65382,
-    type: 2}
-  m_PrefabInternal: {fileID: 2076355814}
 --- !u!1 &1277250275 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: 8329b2bf06854954daacf14c065a384a, type: 3}
@@ -771,7 +766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2923ba459505744183ddaf841e0cee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 1130915255}
+  rotateSpeed: 5
+  moveSpeed: 5
 --- !u!1 &1287159430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,6 +1079,11 @@ Prefab:
       propertyPath: turnSource
       value: 
       objectReference: {fileID: 1130915252}
+    - target: {fileID: 114231757482550146, guid: 4ca8d5ee95844614bb0e0b2198d65382,
+        type: 2}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 1277250276}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ca8d5ee95844614bb0e0b2198d65382, type: 2}
   m_IsPrefabParent: 0

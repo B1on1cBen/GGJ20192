@@ -21,6 +21,9 @@ GameObject:
   - component: {fileID: 4310323977092026}
   - component: {fileID: 33155195564809166}
   - component: {fileID: 23786136063024654}
+  - component: {fileID: 114307834640292940}
+  - component: {fileID: 114379091329076990}
+  - component: {fileID: 114123477524997318}
   m_Layer: 0
   m_Name: ArmChair
   m_TagString: Untagged
@@ -35,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1046438801171166}
   m_LocalRotation: {x: 0.000000015454312, y: 0.7071067, z: -0.000000015454308, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.5, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +86,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1046438801171166}
   m_Mesh: {fileID: 4300000, guid: c850483a55800cf4b884b8501613ba13, type: 3}
+--- !u!114 &114123477524997318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046438801171166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5753cc4cf5cc5c647b72031dc32952ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  z: 0
+--- !u!114 &114307834640292940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046438801171166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56176e76688d5b94aab5623d331ef050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+--- !u!114 &114379091329076990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046438801171166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc06b711b9110434387eba487c8e9255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facing: 0
+  length: 1
+  width: 1
+  WinningX: 0
+  WinningY: 0
+  OriginSquare: {fileID: 0}
+  WinningPosition: {fileID: 0}

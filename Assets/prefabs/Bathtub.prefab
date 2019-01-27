@@ -21,6 +21,9 @@ GameObject:
   - component: {fileID: 4010970989104886}
   - component: {fileID: 33718973835212416}
   - component: {fileID: 23777214318901864}
+  - component: {fileID: 114440685923991872}
+  - component: {fileID: 114702649001390952}
+  - component: {fileID: 114926456957392134}
   m_Layer: 0
   m_Name: Bathtub
   m_TagString: Untagged
@@ -35,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184896223987398}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.5, y: 0, z: -4}
   m_LocalScale: {x: 1.270427, y: 1, z: 1.289783}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +86,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184896223987398}
   m_Mesh: {fileID: 4300016, guid: c850483a55800cf4b884b8501613ba13, type: 3}
+--- !u!114 &114440685923991872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184896223987398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56176e76688d5b94aab5623d331ef050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+--- !u!114 &114702649001390952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184896223987398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc06b711b9110434387eba487c8e9255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facing: 0
+  length: 1
+  width: 1
+  WinningX: 0
+  WinningY: 0
+  OriginSquare: {fileID: 0}
+  WinningPosition: {fileID: 0}
+--- !u!114 &114926456957392134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184896223987398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5753cc4cf5cc5c647b72031dc32952ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  z: 0

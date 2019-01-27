@@ -21,6 +21,9 @@ GameObject:
   - component: {fileID: 4263384664507994}
   - component: {fileID: 33080298166127858}
   - component: {fileID: 23223222016362282}
+  - component: {fileID: 114938784932364010}
+  - component: {fileID: 114728545880070806}
+  - component: {fileID: 114461226104094472}
   m_Layer: 0
   m_Name: KitchenCounterShort
   m_TagString: Untagged
@@ -35,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1772320354419106}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: -0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +86,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1772320354419106}
   m_Mesh: {fileID: 4300030, guid: c850483a55800cf4b884b8501613ba13, type: 3}
+--- !u!114 &114461226104094472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1772320354419106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5753cc4cf5cc5c647b72031dc32952ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  z: 0
+--- !u!114 &114728545880070806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1772320354419106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc06b711b9110434387eba487c8e9255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facing: 0
+  length: 1
+  width: 1
+  WinningX: 0
+  WinningY: 0
+  OriginSquare: {fileID: 0}
+  WinningPosition: {fileID: 0}
+--- !u!114 &114938784932364010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1772320354419106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56176e76688d5b94aab5623d331ef050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0

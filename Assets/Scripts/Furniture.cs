@@ -10,8 +10,8 @@ public class Furniture : MonoBehaviour
     public int WinningX;
     public int WinningY;
 
-    [HideInInspector] public GameObject OriginSquare;
-    [HideInInspector] public BuildingBlock WinningPosition;
+    public GameObject OriginSquare;
+    public BuildingBlock WinningPosition;
 
     GameManager gameManager;
 
